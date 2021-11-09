@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { geolocated } from 'react-geolocated';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
+import myData from "./apiloction.json"
 import "./App.css"
 import {iconPerson} from "./customIcon"
 const App = (props) => {
+  console.log(myData)
   const defaultLat=35.5;
   const defaultlog=51.5;
   const latitude=props.coords ? props.coords.latitude : defaultLat;
@@ -37,7 +39,26 @@ const App = (props) => {
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
   />
-  <LocationMarker/>
+  {/* <LocationMarker/> */}
+
+
+{
+  myData.map((data)=>(
+    <Marker 
+    key={data.id}
+    position={[data.gps.latitude,data.gps.longitude]}
+    >
+
+    </Marker>
+  ))
+}
+
+
+  <Marker position={[latitude,longitude]}>
+    <Popup>
+      شما اینجاهستید
+    </Popup>
+  </Marker>
 </MapContainer>
     
    
